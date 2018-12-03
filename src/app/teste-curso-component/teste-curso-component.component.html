@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="form-group">
+      <label for="t">CURSO</label>
+      <input
+        id="t"
+        class="form-control"
+        type="text"
+        ngModel
+        #teste
+        required placeholder="Digite o nome do Curso"/>
+    </div>
+    <app-app-curso [nome]="teste.value"></app-app-curso>
+  </div>
+

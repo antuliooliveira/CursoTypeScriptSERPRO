@@ -1,0 +1,37 @@
+
+  data-binding works!
+  <h3>Interpolation</h3>
+  <h2><button class="btn" (click)="onClick()">Clicar</button></h2>
+  <input type="text" ngModel #fone />
+<!-- <p>Telefone: {{ fone.value }}</p>
+<button (click)="onClick(fone.value)">Chamar</button>
+<p>{{ mensagem }}</p> -->
+<input type="text"
+(keyup)="onKeyup($event)"
+(keyup.enter)="onSave(entrada.value)"
+(blur)="onSave(entrada.value)"
+#entrada >
+<div>Conteúdo Atual: {{conteudoAtual}}</div>
+<div>Conteúdo Salvo: {{conteudoSalvo}}</div>
+
+  <label>Selecione uma opção:</label>
+  <select #selecao ngModel>
+    <option value="">Selecione uma opção</option>
+    <option value="success">Sucesso</option>
+    <option value="info">Info</option>
+  </select>
+
+  <div class="alert" role="alert"
+      [hidden]="selecao.value !== 'success'"
+      [class.alert-success]="selecao.value === 'success'">
+  Mensagem de sucesso
+  </div>
+
+  <div class="alert" role="alert"
+  [hidden]="selecao.value !== 'info'"
+  [class.alert-info]="selecao.value === 'info'">
+  Mensagem informativa
+  </div>
+
+
+
