@@ -1,0 +1,21 @@
+<div class="container">
+    <h3> Exercicio 10</h3>
+    <div class="form-group">
+      <select #modo ngModel>
+        <option value="">Selecione uma opção</option>
+        <option value="1">Produto 1</option>
+        <option value="2">Produto 2</option>
+        <option value="3">Produto 3</option>
+        <option value="4">Produto 4</option>
+        <option value="5">Produto 5</option>
+        </select>
+        <div [ngSwitch]="modo.value">
+        <p *ngSwitchCase="'1'">Modo Produto1 ativado</p>
+        <p *ngSwitchCase="'2'">Modo Produto2 ativado</p>
+        <p *ngSwitchCase="'3'">Modo Produto3 ativado</p>
+        <p *ngSwitchCase="'4'">Modo Produto4 ativado</p>
+        <p *ngSwitchCase="'5'">Modo Produto1 ativado</p>
+        <p *ngSwitchDefault>Modo padrão ativado</p>
+        </div>
+    </div>
+</div>
