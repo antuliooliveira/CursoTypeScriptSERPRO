@@ -10,16 +10,16 @@ export const FORMAS = [
 ];
 
 export class Pedido {
-  constructor(public Produto: number,
+  constructor(public idxProduto: number,
               public quantidade: number,
-              public Forma: number) {}
+              public idxForma: number) {}
 
   get produto() {
-    return PRODUTOS[this.produto];
+    return PRODUTOS[this.idxProduto];
   }
 
   get forma() {
-    return FORMAS[this.forma];
+    return FORMAS[this.idxForma];
   }
 
   get total(): number {

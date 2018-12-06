@@ -1,9 +1,9 @@
+<form [formGroup]="form">
     <div class="card">
       <div class="card-header">
         Exercício 10
       </div>
-      <form [formGroup]="form">
-       <div class="card-body">
+        <div class="card-body">
         <div class="form-row">
           <div class="form-group col-sm-4">
             <label for="produto">Produto</label>
@@ -36,17 +36,15 @@
         </div>
         <div class="form-row">
           <div class="form-group col-sm-4">
-            <button
+            <button type="button"
               class="btn btn-primary"
               (click)="incluir()">Incluir</button>
           </div>
         </div>
       </div>
-    </form>
-    </div>
-
-
-    <table class="table table-bordered table-striped margin-top" >
+      </div>
+</form>
+      <table class="table table-bordered table-striped margin-top" >
       <thead>
         <tr>
           <th>Produto</th>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PRODUTOS, FORMAS, Pedido } from './../shared/model/pedido';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
@@ -9,9 +9,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class PedidosComponent implements OnInit {
   form = new FormGroup({
     produto: new FormControl(),
-    valor: new FormControl(),
+    forma: new FormControl(),
     quantidade: new FormControl()
-        });
+  });
 
   pedidos: Pedido[];
 
@@ -29,12 +29,12 @@ export class PedidosComponent implements OnInit {
     return FORMAS;
   }
 
-      incluir() {
+  incluir() {
 
     const pedido = new Pedido(
-      parseInt(this.form.value.produto),
-      parseInt(this.form.value.quantidade),
-      parseInt(this.form.value.forma),
+      this.form.value.produto,
+      this.form.value.quantidade,
+      this.form.value.forma
       );
 
     this.pedidos.push(pedido);
