@@ -1,22 +1,81 @@
-<div class="container">
-    <h3> Exercicio 10</h3>
-    <div class="form-group">
-      <select #modo ngModel>
-        <option value="">Selecione uma opção</option>
-        <option value="1">Produto 11</option>
-        <option value="2">Produto 22</option>
-        <option value="3">Produto 33</option>
-        <option value="4">Produto 44</option>
-        <option value="5">Produto 55</option>
-        </select>
-        <div [ngSwitch]="modo.value">
-        <p *ngSwitchCase="'11'">Modo Produto1 ativado</p>
-        <p *ngSwitchCase="'22'">Modo Produto2 ativado</p>
-        <p *ngSwitchCase="'33'">Modo Produto3 ativado</p>
-        <p *ngSwitchCase="'44'">Modo Produto4 ativado</p>
-        <p *ngSwitchCase="'55'">Modo Produto1 ativado</p>
-        <p *ngSwitchDefault>Modo padrão ativado</p>
-       <!-- <p {{ modo.value }}> </p> -->
+    <div class="card">
+      <div class="card-header">
+        Exercício 10
+      </div>
+      <form [formGroup]="form">
+       <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-sm-4">
+            <label for="produto">Produto</label>
+            <select id="produto"
+              formControlName="produto"
+              class="form-control">
+              <option *ngFor="let p of produtos, let i = index"
+                [value]="i">
+                {{ p.nome }} ({{ p.valor | currency:'BRL' }})
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-sm-4">
+            <label for="quantidade">Quantidade</label>
+            <input type="text"
+              formControlName="quantidade"
+              class="form-control" />
+          </div>
+          <div class="form-group col-sm-4">
+            <label for="forma">Forma</label>
+            <select id="forma"
+             formControlName="forma"
+              class="form-control">
+              <option *ngFor="let f of formas, let i = index"
+                [value]="i">
+                {{ f.nome }}
+              </option>
+            </select>
+          </div>
         </div>
+        <div class="form-row">
+          <div class="form-group col-sm-4">
+            <button
+              class="btn btn-primary"
+              (click)="incluir()">Incluir</button>
+          </div>
+        </div>
+      </div>
+    </form>
     </div>
-</div>
+
+
+    <table class="table table-bordered table-striped margin-top" >
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço Unit.</th>
+          <th>Quantidade</th>
+          <th>Forma Pag.</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="pedidos.length === 0">
+          <td colspan="5">
+            Nenhum registro encontrado
+          </td>
+        </tr>
+        <tr *ngFor="let p of pedidos">
+          <td>{{ p.produto.nome }}</td>
+          <td>{{ p.produto.valor | currency:'BRL' }}</td>
+          <td>{{ p.quantidade }}</td>
+          <td>{{ p.forma.nome }}</td>
+          <td>{{ p.total | currency:'BRL' }}</td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="pedidos.length > 0">
+        <tr>
+          <td colspan="5">
+            TOTAL: {{ getTotal() | currency:'BRL' }}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
