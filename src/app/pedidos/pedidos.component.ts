@@ -1,31 +1,28 @@
+import { PedidoService } from './../shared/services/pedido.service';
 import { Component, OnInit } from '@angular/core';
 import { PRODUTOS, FORMAS, Pedido } from './../shared/model/pedido';
-import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidationErrors} from '@angular/forms';
+
+
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
   styleUrls: ['./pedidos.component.css']
 })
 export class PedidosComponent implements OnInit {
-  //form = new FormGroup({
-   // produto: new FormControl(),
-  //  forma: new FormControl(),
-   // quantidade: new FormControl()
-  //});
+
   form: FormGroup;
   erroQtd = false;
 
-  pedidos: Pedido[];
 
-  //constructor() { }
-  constructor(private formBuilder: FormBuilder){}
+    // tslint:disable-next-line:no-shadowed-variable
+  constructor(private formBuilder: FormBuilder, private pedidoService: PedidoService) {}
 
   ngOnInit() {
-    this.pedidos = [];
    this.form = this.formBuilder.group( {
      produto: null,
      forma: null,
-     quantidade:[null, [Validators.required, Validators.minLength(2)]]
+     quantidade: [null, [Validators.required, Validators.minLength(2)]]
    });
   }
 
@@ -36,6 +33,11 @@ export class PedidosComponent implements OnInit {
   get formas() {
     return FORMAS;
   }
+
+  listaPedidos (): Pedido[] {
+    return this.pedidoService.listar();
+  }
+
 
   incluir() {
 
@@ -54,11 +56,18 @@ export class PedidosComponent implements OnInit {
       this.form.value.forma
       );
 
-    this.pedidos.push(pedido);
+
+    this.pedidoService.incluir (pedido);
   }
 
   getTotal() {
-    return this.pedidos
+    return this.pedidoService.listar()
       .reduce((acc, cv) => acc + cv.total, 0);
+  }
+
+  validarCodigoFactory(max: number) {
+    return (c: AbstractControl): ValidationErrors|null => {
+        return(+c.value < max) ? null : { vlInvalido: true};
+    };
   }
 }

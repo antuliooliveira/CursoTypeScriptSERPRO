@@ -58,12 +58,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="pedidos.length === 0">
+        <tr *ngIf="listaPedidos().length === 0">
           <td colspan="5">
             Nenhum registro encontrado
           </td>
         </tr>
-        <tr *ngFor="let p of pedidos">
+        <tr *ngFor="let p of listaPedidos()">
           <td>{{ p.produto.nome }}</td>
           <td>{{ p.produto.valor | currency:'BRL' }}</td>
           <td>{{ p.quantidade }}</td>
@@ -71,7 +71,7 @@
           <td>{{ p.total | currency:'BRL' }}</td>
         </tr>
       </tbody>
-      <tfoot *ngIf="pedidos.length > 0">
+      <tfoot *ngIf="listaPedidos().length > 0">
         <tr>
           <td colspan="5">
             TOTAL: {{ getTotal() | currency:'BRL' }}
