@@ -7,18 +7,26 @@ import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
   styleUrls: ['./pedidos.component.css']
 })
 export class PedidosComponent implements OnInit {
-  form = new FormGroup({
-    produto: new FormControl(),
-    forma: new FormControl(),
-    quantidade: new FormControl()
-  });
+  //form = new FormGroup({
+   // produto: new FormControl(),
+  //  forma: new FormControl(),
+   // quantidade: new FormControl()
+  //});
+  form: FormGroup;
+  erroQtd = false;
 
   pedidos: Pedido[];
 
-  constructor() { }
+  //constructor() { }
+  constructor(private formBuilder: FormBuilder){}
 
   ngOnInit() {
     this.pedidos = [];
+   this.form = this.formBuilder.group( {
+     produto: null,
+     forma: null,
+     quantidade:[null, [Validators.required, Validators.minLength(2)]]
+   });
   }
 
   get produtos() {
@@ -30,6 +38,15 @@ export class PedidosComponent implements OnInit {
   }
 
   incluir() {
+
+    if (!this.form.valid) {
+      this.erroQtd = true;
+      return;
+      // throw new Error('Method not implemented.');
+    } else {
+      this.erroQtd = false;
+    }
+
 
     const pedido = new Pedido(
       this.form.value.produto,

@@ -9,7 +9,7 @@
             <label for="produto">Produto</label>
             <select id="produto"
               formControlName="produto"
-              class="form-control">
+               class="form-control">
               <option *ngFor="let p of produtos, let i = index"
                 [value]="i">
                 {{ p.nome }} ({{ p.valor | currency:'BRL' }})
@@ -18,9 +18,12 @@
           </div>
           <div class="form-group col-sm-4">
             <label for="quantidade">Quantidade</label>
-            <input type="text"
-              formControlName="quantidade"
-              class="form-control" />
+            <input type="text" formControlName="quantidade"
+             class="form-control" />
+              <!-- <p *ngIf="form.controls.quantidade.touched && form.controls.quantidade.errors"> -->
+              <p *ngIf="erroQtd === true">
+                  CAMPO OBRIGATORIO !
+              </p>
           </div>
           <div class="form-group col-sm-4">
             <label for="forma">Forma</label>
