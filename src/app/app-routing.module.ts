@@ -1,15 +1,13 @@
-import { PedidosComponent } from './pedidos/pedidos.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { PedidoComponent } from './home/pedidos.Component';
+import { PedidosComponent } from '../app/pedidos/pedidos.component';
 
-const APP_ROUTES : Routes = [
-  {path : 'pedidos', Component: PedidoComponent}];
+const routes: Routes = [
+  {path : 'pedidos', component: PedidosComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { APP_ROUTES};
+export class AppRoutingModule { }
