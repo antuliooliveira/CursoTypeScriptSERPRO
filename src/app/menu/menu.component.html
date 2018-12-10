@@ -1,0 +1,18 @@
+<div class="container">
+  <h3> Exercicio 17</h3>
+  <div class="form-group">
+    <label for = "far"> MENU DE PEDIDOS</label>
+    <div class="container">
+      <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Módulo
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button" routerLink="/pedido">Pedidos</button>
+            <button class="dropdown-item" type="button" routerLink="/ferramenta">Calculadora</button>
+            <button class="dropdown-item" type="button" routerLink="/eleicao" >Eleição</button>
+          </div>
+      </div>
+      <router-outlet></router-outlet>
+  </div>
+</div>
