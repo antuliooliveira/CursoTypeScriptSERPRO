@@ -25,14 +25,13 @@ import { MenuComponent } from './menu/menu.component';
     OperacaoComponent,
     FerramentaComponent,
     PedidosComponent,
-    MenuComponent
-  ],
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+      ],
   providers: [],
   bootstrap: [AppComponent]
 })
