@@ -20,8 +20,8 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit() {
    this.form = this.formBuilder.group( {
-     produto: null,
-     forma: null,
+     idxProduto: null,
+     idxForma: null,
      quantidade: [null, [Validators.required, Validators.minLength(2)]]
    });
   }
@@ -34,7 +34,7 @@ export class PedidosComponent implements OnInit {
     return FORMAS;
   }
 
-  listaPedidos (): Pedido[] {
+  listarPedidos (): Pedido[] {
     return this.pedidoService.listar();
   }
 
@@ -51,14 +51,17 @@ export class PedidosComponent implements OnInit {
 
 
     const pedido = new Pedido(
-      this.form.value.produto,
+      this.form.value.idxProduto,
       this.form.value.quantidade,
-      this.form.value.forma
+      this.form.value.idxForma
       );
 
 
     this.pedidoService.incluir (pedido);
-  }
+    }
+    excluir(id_pedido: number) {
+      this.pedidoService.excluir(id_pedido);
+    }
 
   getTotal() {
     return this.pedidoService.listar()

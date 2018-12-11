@@ -2,11 +2,12 @@ import { ModuleWithProviders } from '@angular/core';
 import { PedidosComponent } from '../app/pedidos/pedidos.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PedidosDetalheComponent } from './pedidos-detalhe/pedidos-detalhe.component';
 
 
 const routes: Routes = [
   {path: 'pedidos', component: PedidosComponent},
-  // {path:'pedidos/:id',component: PedidosDetalheComponent},
+   {path:'pedidos/:id',component: PedidosDetalheComponent},
   {path: '', redirectTo: '', pathMatch: 'full'}
 ];
 

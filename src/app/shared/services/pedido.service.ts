@@ -15,6 +15,13 @@ export class PedidoService {
   incluir (pedido: Pedido) {
     this.pedidos.push(pedido);
   }
+  consultar (id_pedido: number) {
+    return this.pedidos[id_pedido];
+
+  }
+  excluir (id_pedido: number){
+    this.pedidos.splice(id_pedido,1);
+  }
 
   listar () {
     return this.pedidos;

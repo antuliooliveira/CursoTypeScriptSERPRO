@@ -13,6 +13,7 @@ import { OperacaoComponent } from './operacao/operacao.component';
 import { FerramentaComponent } from './ferramenta/ferramenta.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { MenuComponent } from './menu/menu.component';
+import { PedidosDetalheComponent } from './pedidos-detalhe/pedidos-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MenuComponent } from './menu/menu.component';
     OperacaoComponent,
     FerramentaComponent,
     PedidosComponent,
+    PedidosDetalheComponent,
       ],
   imports: [
     BrowserModule,
