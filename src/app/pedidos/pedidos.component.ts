@@ -13,6 +13,7 @@ export class PedidosComponent implements OnInit {
 
   form: FormGroup;
   erroQtd = false;
+  pedido: Pedido[];
 
 
     // tslint:disable-next-line:no-shadowed-variable
@@ -24,6 +25,14 @@ export class PedidosComponent implements OnInit {
      idxForma: null,
      quantidade: [null, [Validators.required, Validators.minLength(2)]]
    });
+
+   this.pedidoService.listar().subscribe(value => {
+    this.pedido = value;
+    },
+    error => {
+    alert('Erro do servidor durante a consulta de cursos!');
+    });
+
   }
 
   get produtos() {
@@ -35,7 +44,7 @@ export class PedidosComponent implements OnInit {
   }
 
   listarPedidos (): Pedido[] {
-    return this.pedidoService.listar();
+    return this.pedido;
   }
 
 
@@ -64,8 +73,7 @@ export class PedidosComponent implements OnInit {
     }
 
   getTotal() {
-    return this.pedidoService.listar()
-      .reduce((acc, cv) => acc + cv.total, 0);
+    return this.pedido.reduce((acc, cv) => acc + cv.total, 0);
   }
 
   validarCodigoFactory(max: number) {
