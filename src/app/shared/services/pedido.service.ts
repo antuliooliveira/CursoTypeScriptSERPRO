@@ -26,14 +26,11 @@ export class PedidoService {
     this.pedidos.splice(id_pedido, 1);
   }
 
-  // listar () {
-    // return this.pedidos;
-  // }
-listar (): Observable<Pedido[]> {
-   return this.http.get<Pedido[]>('http://localhost:3000/api/listar').pipe(
-    map(pedidos => pedidos.map(e => Object.assign(new Pedido(), e)))
- );
-}
+  listar (): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>('http://localhost:3000/api/pedidos').pipe(
+      map(pedidos => pedidos.map(e => Object.assign(new Pedido(), e)))
+    );
+  }
 
 
 }

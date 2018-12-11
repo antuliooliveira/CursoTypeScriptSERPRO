@@ -1,177 +1,113 @@
-<!-- <form [formGroup]="form">
-    <div class="card">
-      <div class="card-header">
-        Exercício 10
-      </div>
-        <div class="card-body">
-        <div class="form-row">
-          <div class="form-group col-sm-4">
-            <label for="produto">Produto</label>
-            <select id="produto"
-              formControlName="produto"
-               class="form-control">
-              <option *ngFor="let p of produtos, let i = index"
-                [value]="i">
-                {{ p.nome }} ({{ p.valor | currency:'BRL' }})
-              </option>
-            </select>
-          </div>
-          <div class="form-group col-sm-4">
-            <label for="quantidade">Quantidade</label>
-            <input type="text" formControlName="quantidade"
-             class="form-control" />
-               <p *ngIf="form.controls.quantidade.touched && form.controls.quantidade.errors">
-              <p *ngIf="erroQtd === true">
-                  CAMPO OBRIGATORIO !
-              </p>
-          </div>
-          <div class="form-group col-sm-4">
-            <label for="forma">Forma</label>
-            <select id="forma"
-             formControlName="forma"
-              class="form-control">
-              <option *ngFor="let f of formas, let i = index"
-                [value]="i">
-                {{ f.nome }}
-              </option>
+<form [formGroup]="form">
+  <div class="card">
+    <div class="card-header">Pedido</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="prod">Produto</label>
+            <select class="form-control" id="prod" formControlName="idxProduto">
+              <option [value]="null">Selecione</option>
+              <option *ngFor="let p of produtos; let i = index" [value]="i">
+                {{ p.nome }}</option>
             </select>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group col-sm-4">
-            <button type="button"
-              class="btn btn-primary"
-              (click)="incluir()">Incluir X</button>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="fPag">Forma Pagamento</label>
+            <select class="form-control" id="fPag" formControlName="idxForma">
+              <option [value]="null">Selecione</option>
+              <option *ngFor="let fp of formas; let j = index" [value]="j">{{
+                fp.nome
+              }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="qtde">Quantidade</label>
+            <input
+              id="qtde"
+              class="form-control"
+              type="text"
+              formControlName="quantidade"
+            />
           </div>
         </div>
       </div>
-      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <button
+        type="button"
+        (click)="incluir()"
+        [disabled]="!form.valid"
+        class="btn btn-primary"
+      >
+        Incluir
+      </button>
+    </div>
+  </div>
 </form>
-      <table class="table table-bordered table-striped margin-top" >
+<br />
+
+<div class="card">
+  <div class="card-header">Carrinho</div>
+  <div class="card-body" *ngIf="listarPedidos().length === 0">
+    Compra essa porcaria....
+  </div>
+  <div class="card-body card-body-pad" *ngIf="listarPedidos().length > 0">
+    <table class="table table-striped" style="margin-bottom: 0;">
       <thead>
         <tr>
-          <th>Produto</th>
-          <th>Preço Unit.</th>
-          <th>Quantidade</th>
-          <th>Forma Pag.</th>
-          <th>Total</th>
+          <td align="left"><b>Produto</b></td>
+          <td align="right"><b>Valor Unit.</b></td>
+          <td align="center"><b>Quantidade</b></td>
+          <td align="center"><b>Forma de Pagamento</b></td>
+          <td align="right"><b>Total</b></td>
+          <td align="center"><b>#</b></td>
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="listaPedidos().length === 0">
-          <td colspan="5">
-            Nenhum registro encontrado
+        <tr *ngFor="let pedido of listarPedidos(); let j = index">
+          <td>{{ pedido.produto.nome }}</td>
+          <td align="right">
+            {{ pedido.produto.valor | currency:'BRL'}}
           </td>
-        </tr>
-        <tr *ngFor="let p of listaPedidos()">
-          <td>{{ p.produto.nome }}</td>
-          <td>{{ p.produto.valor | currency:'BRL' }}</td>
-          <td>{{ p.quantidade }}</td>
-          <td>{{ p.forma.nome }}</td>
-          <td>{{ p.total | currency:'BRL' }}</td>
+          <td align="center">{{ pedido.quantidade }}</td>
+          <td align="center">
+
+               {{ pedido.forma.nome }} ( {{pedido.forma.valor}} )
+
+          </td>
+          <td align="right">
+            <!-- {{ pedido.totalFormatado | currency:'BRL'}} -->
+          </td>
+          <td align="center">
+            <button
+              class="btn btn-primary btn-sm margin-5"
+              (click)="excluir(j)"
+              type="button"
+            >
+              Excluir
+            </button>
+            <button
+              class="btn btn-primary btn-sm"
+              [routerLink]="['/pedidos', j]"
+              type="button"
+            >
+              Detalhar
+            </button>
+          </td>
         </tr>
       </tbody>
-      <tfoot *ngIf="listaPedidos().length > 0">
+      <tfoot>
         <tr>
-          <td colspan="5">
-            TOTAL: {{ getTotal() | currency:'BRL' }}
-          </td>
+          <td colspan="4">Total</td>
+          <td align="right">{{ getTotal() | currency: "BRL" }}</td>
+          <td></td>
         </tr>
       </tfoot>
-    </table> -->
-    <form [formGroup]="form">
-      <div class="card">
-          <div class="card-header">
-              Pedido
-          </div>
-          <div class="card-body">
-              <div class="row">
-                  <div class="col-4">
-                      <div class="form-group">
-                          <label for="prod" >Produto</label>
-                          <select class="form-control" id="prod" formControlName="idxProduto" >
-                              <option [value]="null">Selecione</option>
-                              <option *ngFor="let p of produtos, let i = index" [value]="i">{{p.nome}}</option>
-                          </select>
-                      </div>
-                  </div>
-                  <div class="col-4">
-                      <div class="form-group">
-                          <label for="fPag">Forma Pagamento</label>
-                          <select class="form-control" id="fPag" formControlName="idxForma">
-                              <option [value]="null">Selecione</option>
-                              <option *ngFor="let fp of formas, let j = index" [value]="j">{{fp.nome}}</option>
-                          </select>
-                      </div>
-                  </div>
-                  <div class="col-4">
-                      <div class="form-group">
-                          <label for="qtde">Quantidade</label>
-                          <input id="qtde" class="form-control" type="text" formControlName="quantidade"/>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="card-footer text-muted">
-              <button type="button" (click)="incluir()" [disabled]="!form.valid"   class="btn btn-primary" >Incluir</button>
-          </div>
-      </div>
-  </form>
-  <br/>
-
-  <div class="card">
-      <div class="card-header">
-          Carrinho
-      </div>
-      <div class="card-body" *ngIf="listarPedidos().length === 0" >
-          Compra essa porcaria....
-      </div>
-      <div class="card-body card-body-pad" *ngIf="listarPedidos().length > 0">
-          <table class="table table-striped" style="margin-bottom: 0;" >
-              <thead>
-                  <tr>
-                  <td align='left'><b>Produto</b></td>
-                  <td align='right'><b>Valor Unit.</b></td>
-                  <td align='center'><b>Quantidade</b></td>
-                  <td align='center'><b>Forma de Pagamento</b></td>
-                  <td align='right'><b>Total</b></td>
-                  <td align='center'><b>#</b></td>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let pedido of listarPedidos(), let j = index">
-                      <td>
-                      {{ pedido.produto.nome }}
-                      </td>
-                      <td align='right'>
-                         <!-- {{ pedido.valorFormatado | currency:'BRL'}} -->
-                      </td>
-                      <td align='center'>
-                          {{ pedido.quantidade }}
-                      </td>
-                      <td align='center'>
-                          <!-- {{ pedido.formaPagamento.nome }} ( {{pedido.formaPagamento.desconto}} ) -->
-                      </td>
-                      <td align='right'>
-                          <!-- {{ pedido.totalFormatado | currency:'BRL'}} -->
-                      </td>
-                      <td align='center'>
-                          <button class="btn btn-primary btn-sm margin-5" (click)="excluir(j)" type="button" >Excluir</button>
-                          <button class="btn btn-primary btn-sm" [routerLink]="['/pedidos', j]" type="button" >Detalhar</button>
-                      </td>
-                  </tr>
-              </tbody>
-              <tfoot>
-                  <tr>
-                  <td colspan="4" >
-                      Total
-                  </td>
-                  <td align='right'>
-                      {{getTotal() | currency:'BRL' }}
-                  </td>
-                  <td></td>
-                  </tr>
-              </tfoot>
-          </table>
-      </div>
+    </table>
   </div>
+</div>

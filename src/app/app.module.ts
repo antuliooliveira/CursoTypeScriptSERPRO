@@ -14,6 +14,7 @@ import { FerramentaComponent } from './ferramenta/ferramenta.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { MenuComponent } from './menu/menu.component';
 import { PedidosDetalheComponent } from './pedidos-detalhe/pedidos-detalhe.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PedidosDetalheComponent } from './pedidos-detalhe/pedidos-detalhe.compo
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
+    ReactiveFormsModule
       ],
   providers: [],
   bootstrap: [AppComponent]
