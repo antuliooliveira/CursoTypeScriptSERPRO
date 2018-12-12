@@ -20,18 +20,27 @@ export class PedidosComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private pedidoService: PedidoService) {}
 
   ngOnInit() {
-   this.form = this.formBuilder.group( {
-     idxProduto: null,
-     idxForma: null,
-     quantidade: [null, [Validators.required, Validators.minLength(2)]]
-   });
 
-   this.pedidoService.listar().subscribe(value => {
-    this.pedido = value;
-    },
-    error => {
-    alert('Erro do servidor durante a consulta de cursos!');
+    this.pedido = [];
+    this.form = this.formBuilder.group( {
+      idxProduto: null,
+      idxForma: null,
+      quantidade: [null, [Validators.required, Validators.minLength(2)]]
     });
+
+    this.pedidoService.listar().subscribe(value => {
+      this.pedido = value;
+
+      console.log ('Pedido id: ' + this.pedido[0].id);
+      console.log ('Pedido idxForma: ' + this.pedido[0].idxForma);
+      console.log ('Pedido quantidade: ' + this.pedido[0].quantidade);
+
+
+      },
+      error => {
+        alert('Erro do servidor durante a consulta de cursos!');
+      }
+    );
 
   }
 
@@ -44,6 +53,7 @@ export class PedidosComponent implements OnInit {
   }
 
   listarPedidos (): Pedido[] {
+    console.log ('Pedidos no listarPedidos ' + this.pedido);
     return this.pedido;
   }
 
