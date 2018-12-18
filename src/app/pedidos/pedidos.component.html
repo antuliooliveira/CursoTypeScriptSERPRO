@@ -70,7 +70,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let pedido of listarPedidos(); let j = index">
-          <td>{{ pedido.produto.nome }}</td>
+          <td>{{ pedido.produto.nome | capitalize}}</td>
           <td align="right">
             {{ pedido.produto.valor | currency:'BRL'}}
           </td>

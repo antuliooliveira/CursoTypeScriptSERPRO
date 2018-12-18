@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="pedido" >
   <div class="form-group">
-    <label>Produto:</label>{{pedido.produto['nome']}}
+    <label>Produto:</label>{{pedido.produto['nome'] | capitalize }}
   </div>
   <div class="form-group">
     <label>Valor:</label>{{pedido.produto['valor'] | currency:'BRL' }}

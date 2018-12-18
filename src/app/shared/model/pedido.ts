@@ -1,7 +1,7 @@
 export const PRODUTOS = [
-  { nome: 'Feijão', valor: 3.45 },
-  { nome: 'Arroz', valor: 1.37 },
-  { nome: 'Macarrão', valor: 1.82 },
+  { nome: 'feijão', valor: 3.45 },
+  { nome: 'arroz', valor: 1.37 },
+  { nome: 'macarrão', valor: 1.82 },
 ];
 
 export const FORMAS = [
