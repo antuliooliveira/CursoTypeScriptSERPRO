@@ -33,11 +33,19 @@ export class PedidosDetalheComponent implements OnInit {
 
                                                     console.log ('O id é: ' + this.id);
 
-                                                    this.pedido = this.pedidosService.consultar(parseInt(this.id,2));
-                                                    if (this.pedido === null) {
-                                                      this.router.navigate(['/naoEncontrado']);
-                                                    }
+                                                    this.pedidosService.consultar(+this.id).subscribe(value => {
+                                                      this.pedido = value;
+                                                      },
+                                                      error => {
+                                                        alert('Erro do servidor durante a consulta de cursos!');
+                                                      }
+                                                    );
+
+                                                    // if (this.pedido === null) {
+                                                    //   this.router.navigate(['/naoEncontrado']);
+                                                    // }
                                                   });
+
   }
 
 }

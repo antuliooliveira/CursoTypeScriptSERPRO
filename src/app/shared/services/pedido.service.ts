@@ -18,8 +18,10 @@ export class PedidoService {
   incluir (pedido: Pedido) {
     this.pedidos.push(pedido);
   }
-  consultar (id_pedido: number) {
-    return this.pedidos[id_pedido];
+  consultar (id_pedido: number): Observable<Pedido> {
+    return this.http.get<Pedido>('http://localhost:3000/api/pedidos/' + id_pedido).pipe(
+      map(e => Object.assign(new Pedido(), e))
+    );
 
   }
   excluir (id_pedido: number) {

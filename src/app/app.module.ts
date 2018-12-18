@@ -15,6 +15,7 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { MenuComponent } from './menu/menu.component';
 import { PedidosDetalheComponent } from './pedidos-detalhe/pedidos-detalhe.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CapitalizePipe } from './shared/capitalize.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     FerramentaComponent,
     PedidosComponent,
     PedidosDetalheComponent,
+    CapitalizePipe,
       ],
   imports: [
     BrowserModule,

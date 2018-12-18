@@ -5,8 +5,8 @@ export const PRODUTOS = [
 ];
 
 export const FORMAS = [
-  { nome: 'Boleto (10%)', valor: 0.10 },
-  { nome: 'Cartão (5%)', valor: 0.05 }
+  { nome: 'Boleto (10%)', valor: 0.10, desconto: '10%' },
+  { nome: 'Cartão (5%)', valor: 0.05, desconto: '5%' }
 ];
 
 export class Pedido {

@@ -30,12 +30,6 @@ export class PedidosComponent implements OnInit {
 
     this.pedidoService.listar().subscribe(value => {
       this.pedido = value;
-
-      console.log ('Pedido id: ' + this.pedido[0].id);
-      console.log ('Pedido idxForma: ' + this.pedido[0].idxForma);
-      console.log ('Pedido quantidade: ' + this.pedido[0].quantidade);
-
-
       },
       error => {
         alert('Erro do servidor durante a consulta de cursos!');
