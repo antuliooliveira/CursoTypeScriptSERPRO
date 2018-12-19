@@ -20,7 +20,10 @@ export class PedidosComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private pedidoService: PedidoService) {}
 
   ngOnInit() {
+    this.buildForm();
+  }
 
+  buildForm() {
     this.pedido = [];
     this.form = this.formBuilder.group( {
       idxProduto: null,
@@ -35,7 +38,6 @@ export class PedidosComponent implements OnInit {
         alert('Erro do servidor durante a consulta de cursos!');
       }
     );
-
   }
 
   get produtos() {
@@ -70,10 +72,33 @@ export class PedidosComponent implements OnInit {
       );
 
 
-    this.pedidoService.incluir (pedido);
+    this.pedidoService.
+    incluir(pedido).subscribe(value => {
+        if (value.status === 200) {
+          console.log ('Incluído com sucesso...');
+          this.buildForm();
+        } else {
+          console.log ('Erro!! ' + value.status);
+        }
+    },
+    error => {
+      alert('Erro do servidor durante a consulta de cursos!');
+    });
+
+
     }
     excluir(id_pedido: number) {
-      this.pedidoService.excluir(id_pedido);
+      // this.pedidoService.excluir(id_pedido);
+      this.pedidoService.excluir(id_pedido).subscribe(value => {
+        if (value.status === 200) {
+          this.pedido = this.pedido.filter (e => e.id !== id_pedido);
+        } else {
+          console.log ('Erro!! ' + value.status);
+        }
+    },
+    error => {
+      alert('Erro do servidor durante a consulta de pedidos!');
+  });
     }
 
   getTotal() {

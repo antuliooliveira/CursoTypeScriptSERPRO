@@ -9,14 +9,10 @@ import { map } from 'rxjs/operators';
 })
 export class PedidoService {
 
-  pedidos: Pedido[];
-
-  constructor(private http: HttpClient) {
-        this.pedidos = [];
-   }
+  constructor(private http: HttpClient) { }
 
   incluir (pedido: Pedido) {
-    this.pedidos.push(pedido);
+    return this.http.post ('http://localhost:3000/api/pedidos/', pedido, {observe: 'response', responseType: 'text'});
   }
   consultar (id_pedido: number): Observable<Pedido> {
     return this.http.get<Pedido>('http://localhost:3000/api/pedidos/' + id_pedido).pipe(
@@ -25,7 +21,7 @@ export class PedidoService {
 
   }
   excluir (id_pedido: number) {
-    this.pedidos.splice(id_pedido, 1);
+    return this.http.delete ('http://localhost:3000/api/pedidos/' + id_pedido, {observe: 'response', responseType: 'text'});
   }
 
   listar (): Observable<Pedido[]> {
