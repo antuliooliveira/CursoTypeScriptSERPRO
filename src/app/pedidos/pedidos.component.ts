@@ -63,7 +63,7 @@ export class PedidosComponent implements OnInit {
     }
 
 
-    const pedido = new Pedido(
+    const pedido = new Pedido(0,
       this.form.value.idxProduto,
       this.form.value.quantidade,
       this.form.value.idxForma
