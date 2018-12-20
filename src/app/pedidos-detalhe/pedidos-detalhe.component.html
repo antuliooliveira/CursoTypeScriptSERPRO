@@ -1,21 +1,22 @@
 <div class="form-group">
   <label>Numero do Pedido:</label>{{id}}
 </div>
-<div class="form-group">
-  <label>Produto:</label>{{pedido.produto['nome']}}
+<div *ngIf="pedido" >
+  <div class="form-group">
+    <label>Produto:</label>{{pedido.produto['nome'] | capitalize }}
+  </div>
+  <div class="form-group">
+    <label>Valor:</label>{{pedido.produto['valor'] | currency:'BRL' }}
+  </div>
+  <div class="form-group">
+    <label>Forma de Pagamento:</label>{{pedido.forma['nome']}}
+  </div>
+  <div class="form-group">
+    <label>Desconto:</label> {{pedido.forma['desconto']}}
+  </div>
+  <div class="form-group">
+    <label>Quantidade:</label>{{pedido['quantidade']}}
+  </div>
 </div>
-<div class="form-group">
-  <label>Valor:</label>{{pedido.produto['valor'] | currency:'BRL' }}
-</div>
-<div class="form-group">
-  <label>Forma de Pagamento:</label>{{pedido.formaPagamento['nome']}}
-</div>
-<div class="form-group">
-  <label>Desconto:</label> {{pedido.formaPagamento['desconto']}}
-</div>
-<div class="form-group">
-  <label>Quantidade:</label>{{pedido['quantidade']}}
-</div>
-
 
 <a routerLink="/pedidos">Voltar </a>

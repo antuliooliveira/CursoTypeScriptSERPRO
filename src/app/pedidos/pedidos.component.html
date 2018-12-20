@@ -53,10 +53,10 @@
 
 <div class="card">
   <div class="card-header">Carrinho</div>
-  <div class="card-body" *ngIf="listarPedidos().length === 0">
+  <div class="card-body" *ngIf="listarPedidos() && listarPedidos().length === 0">
     Compra essa porcaria....
   </div>
-  <div class="card-body card-body-pad" *ngIf="listarPedidos().length > 0">
+  <div class="card-body card-body-pad" *ngIf="listarPedidos() && listarPedidos().length > 0">
     <table class="table table-striped" style="margin-bottom: 0;">
       <thead>
         <tr>
@@ -69,8 +69,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let pedido of listarPedidos(); let j = index">
-          <td>{{ pedido.produto.nome }}</td>
+        <tr *ngFor="let pedido of listarPedidos()">
+          <td>{{ pedido.produto.nome | capitalize}}</td>
           <td align="right">
             {{ pedido.produto.valor | currency:'BRL'}}
           </td>
@@ -86,14 +86,14 @@
           <td align="center">
             <button
               class="btn btn-primary btn-sm margin-5"
-              (click)="excluir(j)"
+              (click)="excluir(pedido.id)"
               type="button"
             >
               Excluir
             </button>
             <button
               class="btn btn-primary btn-sm"
-              [routerLink]="['/pedidos', j]"
+              [routerLink]="['/pedidos', pedido.id]"
               type="button"
             >
               Detalhar

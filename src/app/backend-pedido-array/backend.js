@@ -12,14 +12,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-function Pedido(id, idxForma, quantidade) {
+function Pedido(id, idxProduto, idxForma, quantidade) {
   this.id = id;
+  this.idxProduto = idxProduto;
   this.idxForma = idxForma;
   this.quantidade = quantidade;
 }
 
 const PEDIDOS = [
- { id: 0, idxForma: 0, quantidade: 3 }
+ { id: 0, idxProduto: 0, idxForma: 0, quantidade: 3 }
 ];
 var SEQUENCE = 1;
 
@@ -46,7 +47,7 @@ app.post('/api/pedidos', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin','*');
 
-  PEDIDOS.push(new Pedido(SEQUENCE++, req.body.idxForma, req.body.quantidade));
+  PEDIDOS.push(new Pedido(SEQUENCE++, req.body.idxProduto, req.body.idxForma, req.body.quantidade));
   res.sendStatus(200);
 });
 
